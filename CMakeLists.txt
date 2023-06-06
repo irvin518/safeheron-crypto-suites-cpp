@@ -34,7 +34,7 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
         /usr/local/include
         )
 
-target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE /usr/local/lib)
+target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE ${PROTOBUF_LIBRARY_DIRS})
 target_link_libraries(${CMAKE_PROJECT_NAME}
         ${PROTOBUF_LIBRARIES}
         OpenSSL::Crypto
