@@ -3,9 +3,9 @@ cmake_minimum_required(VERSION 3.10)
 project("SafeheronCryptoSuites" VERSION 1.0.1)
 
 set(CMAKE_CXX_STANDARD 11)
-SET(CMAKE_BUILD_TYPE "Release")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O2 -Wall -Wextra -Wno-unused-parameter -Wno-unused-variable -fmacro-prefix-map=${CMAKE_SOURCE_DIR}=/safeheron")
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2 -Wall -Wextra -Wno-unused-parameter -Wno-unused-variable -fmacro-prefix-map=${CMAKE_SOURCE_DIR}=/safeheron")
+#SET(CMAKE_BUILD_TYPE "Release")
+#set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O2 -Wall -Wextra -Wno-unused-parameter -Wno-unused-variable -fmacro-prefix-map=${CMAKE_SOURCE_DIR}=/safeheron")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2 -Wall -Wextra -Wno-unused-parameter -Wno-unused-variable -fmacro-prefix-map=${CMAKE_SOURCE_DIR}=/safeheron")
 
 cmake_policy(SET CMP0076 NEW)
 cmake_policy(SET CMP0077 NEW)
@@ -15,7 +15,7 @@ find_package(PkgConfig REQUIRED)
 pkg_search_module(PROTOBUF REQUIRED protobuf)  # depend on pkg-config, this looks for opencv.pc file
 #set(OPENSSL_USE_STATIC_LIBS TRUE)
 find_package(OpenSSL REQUIRED)
-add_library(${CMAKE_PROJECT_NAME} SHARED "")
+add_library(${CMAKE_PROJECT_NAME} "")
 
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
         src/crypto-bn-cpp/src
@@ -34,7 +34,7 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
         /usr/local/include
         )
 
-target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE ${PROTOBUF_LIBRARY_DIRS})
+target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE /usr/local/lib)
 target_link_libraries(${CMAKE_PROJECT_NAME}
         ${PROTOBUF_LIBRARIES}
         OpenSSL::Crypto
