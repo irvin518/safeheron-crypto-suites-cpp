@@ -11,10 +11,25 @@ cmake_policy(SET CMP0076 NEW)
 cmake_policy(SET CMP0077 NEW)
 cmake_policy(SET CMP0079 NEW)
 
-find_package(PkgConfig REQUIRED)
-pkg_search_module(PROTOBUF REQUIRED protobuf)  # depend on pkg-config, this looks for opencv.pc file
+#find_package(PkgConfig REQUIRED)
+#pkg_search_module(PROTOBUF REQUIRED protobuf)  # depend on pkg-config, this looks for opencv.pc file
 #set(OPENSSL_USE_STATIC_LIBS TRUE)
-find_package(OpenSSL REQUIRED)
+#find_package(OpenSSL REQUIRED)
+
+
+ set(PROTOBUF_INCLUDE_DIRS  "${CMAKE_PREFIX_PATH}/include/")
+ set(PROTOBUF_LIBRARY_DIRS  "${CMAKE_PREFIX_PATH}/lib/")
+ set(PROTOBUF_LIBRARIES  "${CMAKE_PREFIX_PATH}/lib/libprotobuf.a")
+
+
+ #设置openssl的库头文件
+ set(OPENSSL_INCLUDE_DIR  "${CMAKE_PREFIX_PATH}/include/")
+ #设置openssl的库路径
+ set(OPENSSL_SSL_LIBRARY "${CMAKE_PREFIX_PATH}/lib/libssl.a")
+ #设置openssl的工具库
+ set(OPENSSL_CRYPTO_LIBRARY "${CMAKE_PREFIX_PATH}/lib/libcrypto.a")
+
+
 add_library(${CMAKE_PROJECT_NAME} "")
 
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
@@ -33,11 +48,11 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
         ${OPENSSL_INCLUDE_DIR}
         /usr/local/include
         )
-
-target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE /usr/local/lib)
-target_link_libraries(${CMAKE_PROJECT_NAME}
+message(2324r2534${PROTOBUF_LIBRARY_DIRS})
+target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE ${CMAKE_PREFIX_PATH}/lib)
+target_link_libraries(${CMAKE_PROJECT_NAME} PUBLIC
         ${PROTOBUF_LIBRARIES}
-        OpenSSL::Crypto
+        OPENSSL_CRYPTO_LIBRARY
         -ldl
         )
 
