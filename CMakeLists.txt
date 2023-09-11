@@ -13,9 +13,10 @@ cmake_policy(SET CMP0079 NEW)
 
 #find_package(PkgConfig REQUIRED)
 #pkg_search_module(PROTOBUF REQUIRED protobuf)  # depend on pkg-config, this looks for opencv.pc file
-#set(OPENSSL_USE_STATIC_LIBS TRUE)
+set(OPENSSL_USE_STATIC_LIBS TRUE)
 #find_package(OpenSSL REQUIRED)
 
+message("OpenSSl include path ${CMAKE_PREFIX_PATH}/include/")
 
  set(PROTOBUF_INCLUDE_DIRS  "${CMAKE_PREFIX_PATH}/include/")
  set(PROTOBUF_LIBRARY_DIRS  "${CMAKE_PREFIX_PATH}/lib/")
